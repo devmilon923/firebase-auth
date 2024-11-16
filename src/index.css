@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.active {
+  background-color: cadetblue !important;
+  color: white !important;
+}
+html {
+  overflow-y: scroll;
+}
