@@ -21,14 +21,11 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const [currentUser, setCurrentUser] = useState(user);
-
   useEffect(() => {
     const close = onAuthStateChanged(auth, (current) => {
       if (current) {
         setUser(current);
-        setCurrentUser(current);
+
         setLoading(false);
       } else {
         setUser(null);
@@ -82,8 +79,6 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
     return signOut(auth);
   };
-  console.log(currentUser);
-  // setCurrentUser(user);
 
   return (
     <AuthContext.Provider
@@ -103,8 +98,9 @@ export const AuthContextProvider = ({ children }) => {
         facebookLogin,
         auth,
         setUser,
-        setCurrentUser,
-        currentUser,
+
+        // setStateUser,
+        // stateUser,
       }}
     >
       {children}

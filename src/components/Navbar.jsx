@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, stateUser } = useContext(AuthContext);
   const handleLogout = () => {
     logout()
       .then(() => {
@@ -14,6 +14,11 @@ export default function Navbar() {
       })
       .catch((err) => toast.error(err.message));
   };
+
+  useEffect(() => {
+    // alert("New Data coming");
+  }, [stateUser]);
+
   const links = (
     <>
       {user && (

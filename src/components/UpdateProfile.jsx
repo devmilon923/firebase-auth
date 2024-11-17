@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../contexts/AuthContext";
 
-export default function UpdateProfile({ setCurrentUser }) {
-  const { profileUpdate, user, auth } = useContext(AuthContext);
+export default function UpdateProfile() {
+  const { profileUpdate, user, auth, setUser } = useContext(AuthContext);
 
   const [btnLoading, setBtnLoading] = useState(false);
   const handleUpdate = async (e) => {
@@ -35,8 +35,8 @@ export default function UpdateProfile({ setCurrentUser }) {
         };
         await profileUpdate(obj);
         setBtnLoading(false);
-
-        setCurrentUser(true);
+        const updatedUser1 = { ...auth.currentUser };
+        setUser(updatedUser1);
         toast.success("Profile updated");
         e.target.reset();
       } catch (error) {
@@ -54,11 +54,12 @@ export default function UpdateProfile({ setCurrentUser }) {
         const obj = {
           displayName: name,
         };
+
         await profileUpdate(obj);
         setBtnLoading(false);
 
-        setCurrentUser(true);
-        setBtnLoading(true);
+        const updatedUser = { ...auth.currentUser };
+        setUser(updatedUser);
         toast.success("Profile updated");
       } catch (error) {
         setBtnLoading(false);
